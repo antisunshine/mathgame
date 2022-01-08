@@ -1,5 +1,5 @@
-"""Yksinkertainen matikkapeli, jossa satunnaisnumeroita 1 ja 9 välillä lisätään yhteen.
-   Peli palkitsee kekseillä kun on saanut 5 oikeaa vastausta. Max 4 keksiä ja peli loppuu.
+"""Simple mathgame that randomizes numbers from 1 to 9 and user is asked to sum them.
+   You get a cookie when you have 5 right. Game ends when you recieve 4 cookies.
    Susanne Koljonen 29.11.2021"""
 
 from tkinter import *
@@ -9,7 +9,7 @@ from PIL import ImageTk, Image
 root = Tk()
 root.title("Math Game!")
 
-# global variables, arvotaan ensimmäiset ruutuun tulevat satunnaiset luvut
+# global variables, first numers randomized
 
 randNo1 = random.randint(1, 9)
 randNo2 = random.randint(1, 9)
@@ -28,7 +28,6 @@ def solution():
     answer = randNo1 + randNo2
 
     if int(solution) == answer:
-        # en löytäny kirveelläkään miten korjata else osion tekstin näkymistä win tekstin alta joten korvataan tyhjillä
         winLabel["text"] = str(solution) + " is correct! Answer is " + str(answer)
         randNo1 = random.randint(1, 9)
         randNo2 = random.randint(1, 9)
@@ -42,7 +41,7 @@ def solution():
         randNo2 = random.randint(1, 9)
         answer = randNo1 + randNo2
         label.config(text=str(randNo1) + " + " + str(randNo2) + " = ")
-    # tarkistetaan voittopisteitä, jos pisteitä on yli 5, 10, 15, 20, saa keksin.
+    # check for win conditions
     if win == 5:
         winLabel["text"] = "Have a cookie!"
         cookieLabel = Label(frame, image=cookie)
@@ -61,11 +60,11 @@ def solution():
         winLabel["text"] = "You have all the cookies!"
         cookieLabel = Label(frame, image=cookie)
         cookieLabel.grid(row=4, column=3)
-        # disabloidaan napit, peli on päättynyt
+        # disable buttons when wins are 20
         button1["state"] = DISABLED
         button2["state"] = DISABLED
 
-# käyttäjä voi halutessaan pyytää uudet numerot jos ei osaa ratkaista annettua tehtävää
+# user can ask for new numbers if they don't know how to solve the problem
 def renew():
     global randNo1
     global randNo2
